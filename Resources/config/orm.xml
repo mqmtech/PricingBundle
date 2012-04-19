@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="mqm_pricing.type_manager_registry.class">MQM\PricingBundle\Entity\RuleManagerRegistry</parameter>
+        <parameter key="mqm_pricing.discount_rule_manager.class">MQM\PricingBundle\Entity\DiscountRule\DiscountRuleManager</parameter>
+        <parameter key="mqm_pricing.price_rule_manager.class">MQM\PricingBundle\Entity\PriceRule\PriceRuleManager</parameter>
+        
+        <parameter key="mqm_pricing.model.price_rule_default.class">MQM\PricingBundle\Entity\PriceRule\PriceRule</parameter>
+        <parameter key="mqm_pricing.model.discount_by_product_rule.class">MQM\PricingBundle\Entity\DiscountRule\DiscountByProductRule</parameter>
+        <parameter key="mqm_pricing.model.discount_by_category_rule.class">MQM\PricingBundle\Entity\DiscountRule\DiscountByCategoryRule</parameter>
+        <parameter key="mqm_pricing.model.discount_by_time_rule.class">MQM\PricingBundle\Entity\DiscountRule\DiscountByTimeRule</parameter>
+        <parameter key="mqm_pricing.model.discount_by_user_rule.class">MQM\PricingBundle\Entity\DiscountRule\DiscountByUserRule</parameter>
+        <parameter key="mqm_pricing.model.discount_rule.class">MQM\PricingBundle\Entity\DiscountRule</parameter>
+    </parameters>
+
+    <services>
+        <service id="mqm_pricing.price_rule_manager" factory-service="mqm_pricing.type_manager_registry" factory-method="getPriceRuleManager" class="%mqm_pricing.price_rule_manager.class%" public="false">
+            <argument>%mqm_pricing.model.price_rule_default.class%</argument>
+        </service>
+        
+        <service id="mqm_pricing.discount_by_product_manager" factory-service="mqm_pricing.type_manager_registry" factory-method="getDiscountRuleManager" class="%mqm_pricing.discount_rule_manager.class%" public="false">
+            <argument>%mqm_pricing.model.discount_by_product_rule.class%</argument>
+        </service>
+        
+        <service id="mqm_pricing.discount_by_category_manager" factory-service="mqm_pricing.type_manager_registry" factory-method="getDiscountRuleManager" class="%mqm_pricing.discount_rule_manager.class%" public="false">
+            <argument>%mqm_pricing.model.discount_by_category_rule.class%</argument>
+        </service>
+        
+        <service id="mqm_pricing.discount_by_time_manager" factory-service="mqm_pricing.type_manager_registry" factory-method="getDiscountRuleManager" class="%mqm_pricing.discount_rule_manager.class%" public="false">
+            <argument>%mqm_pricing.model.discount_by_time_rule.class%</argument>
+        </service>
+        
+        <service id="mqm_pricing.discount_by_user_manager" factory-service="mqm_pricing.type_manager_registry" factory-method="getDiscountRuleManager" class="%mqm_pricing.discount_rule_manager.class%" public="false">
+            <argument>%mqm_pricing.model.discount_by_user_rule.class%</argument>
+        </service>
+        
+        <service id="mqm_pricing.type_manager_registry" class="%mqm_pricing.type_manager_registry.class%" public="true">
+            <argument type="service" id="mqm_pricing.entity_manager" />
+            <argument>%mqm_pricing.price_rule_manager.class%</argument>
+            <argument>%mqm_pricing.discount_rule_manager.class%</argument>
+            <argument>%mqm_pricing.model.price_rule_default.class%</argument>
+        </service>
+        
+        <service id="mqm_pricing.entity_manager" factory-service="doctrine" factory-method="getEntityManager" class="Doctrine\ORM\EntityManager" public="true">
+        </service>        
+    </services>
+    
+</container>
