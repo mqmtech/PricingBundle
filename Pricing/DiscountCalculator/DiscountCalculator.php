@@ -4,7 +4,7 @@ namespace MQM\PricingBundle\Pricing\DiscountCalculator;
 
 use MQM\PricingBundle\Pricing\DiscountCalculator\DiscountCalculatorInterface;
 use MQM\PricingBundle\Model\DiscountRule\DiscountRuleInterface;
-use MQM\PricingBundle\Pricing\DiscountInterface;
+
 use MQM\PricingBundle\Pricing\PricingFactoryInterface;
 use MQM\PricingBundle\Pricing\PriceInterface;
 use MQM\ToolsBundle\Utils;

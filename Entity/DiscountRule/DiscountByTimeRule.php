@@ -4,7 +4,7 @@ namespace MQM\PricingBundle\Entity\DiscountRule;
 
 use MQM\PricingBundle\Model\DiscountRule\DiscountRuleInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  *

@@ -3,9 +3,9 @@
 namespace MQM\PricingBundle\Entity\PriceRule;
 
 use MQM\PricingBundle\Model\PriceRule\PriceRuleManager as BasePriceRuleManager;
-use MQM\PricingBundle\Model\PriceRule\PriceRuleManagerInterface;
+
 use MQM\PricingBundle\Model\PriceRule\PriceRuleInterface;
-use MQM\ProductBundle\Model\ProductInterface;
+
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;

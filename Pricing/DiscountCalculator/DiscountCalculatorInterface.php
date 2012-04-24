@@ -3,7 +3,7 @@
 namespace MQM\PricingBundle\Pricing\DiscountCalculator;
 
 use MQM\PricingBundle\Pricing\PriceInterface;
-use MQM\PricingBundle\Pricing\DiscountInterface;
+
 use MQM\ProductBundle\Model\ProductInterface;
 
 interface DiscountCalculatorInterface

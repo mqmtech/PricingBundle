@@ -5,7 +5,7 @@ namespace MQM\PricingBundle\Entity\PriceRule;
 use MQM\PricingBundle\Model\PriceRule\PriceRuleInterface;
 use MQM\ProductBundle\Model\ProductInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  *

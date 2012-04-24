@@ -3,7 +3,7 @@
 namespace MQM\PricingBundle\Entity\DiscountRule;
 
 use MQM\PricingBundle\Model\DiscountRule\DiscountRuleManager as BaseDiscountRuleManager;
-use MQM\PricingBundle\Model\DiscountRule\DiscountRuleManagerInterface;
+
 use MQM\PricingBundle\Model\DiscountRule\DiscountRuleInterface;
 
 use Doctrine\ORM\EntityManager;

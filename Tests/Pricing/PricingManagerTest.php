@@ -2,12 +2,12 @@
 
 namespace MQM\PricingBundle\Test\Pricing;
 
-use MQM\PricingBundle\Model\PriceRule\PriceRuleManagerInterface;
-use MQM\PricingBundle\Pricing\PricingInterface;
+
+
 use MQM\PricingBundle\Tests\Pricing\Helper\TestCalculator;
-use MQM\PricingBundle\Event\PricingEvents;
-use MQM\ProductBundle\Model\ProductManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Tests\Functional\AppKernel;
+
+
+
 
 class PriceRuleManagerTest extends \Symfony\Bundle\FrameworkBundle\Test\WebTestCase
 {   
