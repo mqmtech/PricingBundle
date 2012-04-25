@@ -13,8 +13,9 @@
         <parameter key="mqm_pricing.price_default_calculator.class">MQM\PricingBundle\Pricing\PriceCalculator\PriceDefaultCalculator</parameter>
         <parameter key="mqm_pricing.discount_by_product_calculator.class">MQM\PricingBundle\Pricing\DiscountCalculator\DiscountByProductCalculator</parameter>
         <parameter key="mqm_pricing.discount_by_category_calculator.class">MQM\PricingBundle\Pricing\DiscountCalculator\DiscountByCategoryCalculator</parameter>
-        <parameter key="mqm_pricing.discount_by_time_calculator.class">MQM\PricingBundle\Pricing\DiscountCalculator\DiscountByTimeCalculator</parameter>
+        <parameter key="mqm_pricing.discount_by_brand_calculator.class">MQM\PricingBundle\Pricing\DiscountCalculator\DiscountByBrandCalculator</parameter>
         <parameter key="mqm_pricing.discount_by_user_calculator.class">MQM\PricingBundle\Pricing\DiscountCalculator\DiscountByUserCalculator</parameter>
+        <parameter key="mqm_pricing.discount_by_portal_calculator.class">MQM\PricingBundle\Pricing\DiscountCalculator\DiscountByPortalCalculator</parameter>        
     </parameters>
 
     <services>
@@ -45,18 +46,22 @@
             <tag name="mqm_pricing.discount_calculator" />
             <argument type="service" id="mqm_pricing.discount_by_category_manager" />
             <argument type="service" id="mqm_pricing.pricing_factory" />
-            <argument type="service" id="mqm_product.product_manager" />
         </service>
         
-        <service id="mqm_pricing.discount_by_time_rule_calculator" class="%mqm_pricing.discount_by_time_calculator.class%" public="true">
+        <service id="mqm_pricing.discount_by_brand_rule_calculator" class="%mqm_pricing.discount_by_brand_calculator.class%" public="true">
             <tag name="mqm_pricing.discount_calculator" />
-            <argument type="service" id="mqm_pricing.discount_by_time_manager" />
+            <argument type="service" id="mqm_pricing.discount_by_brand_manager" />
             <argument type="service" id="mqm_pricing.pricing_factory" />
         </service>
         
         <service id="mqm_pricing.discount_by_user_rule_calculator" class="%mqm_pricing.discount_by_user_calculator.class%" public="true">
             <tag name="mqm_pricing.discount_calculator" />
             <argument type="service" id="mqm_pricing.discount_by_user_manager" />
+            <argument type="service" id="mqm_pricing.pricing_factory" />
+        </service>
+        
+        <service id="mqm_pricing.discount_by_portal_calculator" class="%mqm_pricing.discount_by_portal_calculator.class%" public="true">
+            <tag name="mqm_pricing.discount_calculator" />
             <argument type="service" id="mqm_pricing.pricing_factory" />
         </service>
     </services>

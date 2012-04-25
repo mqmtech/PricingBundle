@@ -6,9 +6,10 @@ use MQM\PricingBundle\Pricing\DiscountCalculator\DiscountCalculator;
 use MQM\PricingBundle\Model\DiscountRule\DiscountRuleManagerInterface;
 use MQM\PricingBundle\Pricing\PricingFactoryInterface;
 use MQM\PricingBundle\Pricing\PriceInterface;
+use MQM\ProductBundle\Model\ProductManagerInterface;
 use MQM\ProductBundle\Model\ProductInterface;
 
-class DiscountByTimeCalculator extends DiscountCalculator
+class DiscountByBrandCalculator extends DiscountCalculator
 {   
     private $discountRuleManager;
     private $priceFactory;
@@ -25,12 +26,26 @@ class DiscountByTimeCalculator extends DiscountCalculator
      */
     public function addDiscountToPrice(ProductInterface $product, PriceInterface $price)
     {
-        //TODO: Get Rule for the whole portal maybe from a file instead from database?
-        $portalId = 1;
-        $this->discountRule = $this->discountRuleManager->findDiscountRuleBy(array('id' => $portalId));
+        $brand = $product->getBrand();
+        if ($brand == null)
+            return;
+        
+        $brandId = $brand->getId();        
+        if ($brandId == null)
+           return; 
+        
+        $this->discountRule = $this->discountRuleManager->findDiscountRuleBy(array('brandId' => $brandId));
         if ($this->discountRule != null) {
             return $this->addDiscountToPriceUsingDiscountRule($price);
-        }
+        }        
+    }    
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function getDiscountRule()
+    {
+        return $this->discountRule;
     }
 
     /**
@@ -39,13 +54,5 @@ class DiscountByTimeCalculator extends DiscountCalculator
     protected function getPricingFactory()
     {
         return $this->priceFactory;
-    }
-    
-    /**
-     * {@inheritDoc}
-     */
-    protected function getDiscountRule()
-    {
-        return $this->discountRule;
     }
 }

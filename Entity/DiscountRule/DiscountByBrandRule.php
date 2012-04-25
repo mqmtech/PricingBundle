@@ -5,14 +5,13 @@ namespace MQM\PricingBundle\Entity\DiscountRule;
 use MQM\PricingBundle\Model\DiscountRule\DiscountRuleInterface;
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
  *
- * @ORM\Table(name="mqm_pricing_discount_by_time_rule")
+ * @ORM\Table(name="mqm_pricing_discount_by_brand_rule")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
-class DiscountByTimeRule implements DiscountRuleInterface
+class DiscountByBrandRule implements DiscountRuleInterface
 {
     /**
      * @var integer $id
@@ -22,6 +21,13 @@ class DiscountByTimeRule implements DiscountRuleInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+     * @var string $brandId
+     *
+     * @ORM\Column(name="brandId", type="string", nullable=true)
+     */
+    private $brandId;
     
     /**
      * @var \DateTime $createdAt
@@ -45,7 +51,7 @@ class DiscountByTimeRule implements DiscountRuleInterface
     private $discount;
     
     /**
-     * @var \DateTime $start
+     * @var \DateTime $startDate
      *
      * @ORM\Column(name="startDate", type="datetime", nullable=true)
      */
@@ -80,7 +86,17 @@ class DiscountByTimeRule implements DiscountRuleInterface
     {
         $this->id = $id;
     }
+    
+    public function getBrandId()
+    {
+        return $this->brandId;
+    }
 
+    public function setBrandId($brandId)
+    {
+        $this->brandId = $brandId;
+    }
+        
     /**
      * {@inheritDoc}
      */
@@ -129,33 +145,21 @@ class DiscountByTimeRule implements DiscountRuleInterface
         $this->discount = $discount;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getStartDate()
     {
         return $this->startDate;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function setStartDate($startDate)
     {
         $this->startDate = $startDate;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getDeadline()
     {
         return $this->deadline;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function setDeadline($deadline)
     {
         $this->deadline = $deadline;

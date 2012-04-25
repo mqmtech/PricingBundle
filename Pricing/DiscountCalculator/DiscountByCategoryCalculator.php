@@ -14,14 +14,12 @@ class DiscountByCategoryCalculator extends DiscountCalculator
 {   
     private $discountRuleManager;
     private $priceFactory;
-    private $productManager;    
     private $discountRule;
     
-    public function __construct(DiscountRuleManagerInterface $discountRuleManager, PricingFactoryInterface $priceFactory, ProductManagerInterface $productManager)
+    public function __construct(DiscountRuleManagerInterface $discountRuleManager, PricingFactoryInterface $priceFactory)
     {
         $this->discountRuleManager = $discountRuleManager;
         $this->priceFactory = $priceFactory;
-        $this->productManager = $productManager;
     }
     
     /**
@@ -33,8 +31,7 @@ class DiscountByCategoryCalculator extends DiscountCalculator
         if ($category == null)
             return;
         
-        $categoryId = $category->getId();
-        
+        $categoryId = $category->getId();        
         if ($categoryId == null)
            return; 
         

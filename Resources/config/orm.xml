@@ -12,7 +12,7 @@
         <parameter key="mqm_pricing.model.price_rule_default.class">MQM\PricingBundle\Entity\PriceRule\PriceRule</parameter>
         <parameter key="mqm_pricing.model.discount_by_product_rule.class">MQM\PricingBundle\Entity\DiscountRule\DiscountByProductRule</parameter>
         <parameter key="mqm_pricing.model.discount_by_category_rule.class">MQM\PricingBundle\Entity\DiscountRule\DiscountByCategoryRule</parameter>
-        <parameter key="mqm_pricing.model.discount_by_time_rule.class">MQM\PricingBundle\Entity\DiscountRule\DiscountByTimeRule</parameter>
+        <parameter key="mqm_pricing.model.discount_by_brand_rule.class">MQM\PricingBundle\Entity\DiscountRule\DiscountByBrandRule</parameter>
         <parameter key="mqm_pricing.model.discount_by_user_rule.class">MQM\PricingBundle\Entity\DiscountRule\DiscountByUserRule</parameter>
         <parameter key="mqm_pricing.model.discount_rule.class">MQM\PricingBundle\Entity\DiscountRule</parameter>
     </parameters>
@@ -30,8 +30,8 @@
             <argument>%mqm_pricing.model.discount_by_category_rule.class%</argument>
         </service>
         
-        <service id="mqm_pricing.discount_by_time_manager" factory-service="mqm_pricing.type_manager_registry" factory-method="getDiscountRuleManager" class="%mqm_pricing.discount_rule_manager.class%" public="false">
-            <argument>%mqm_pricing.model.discount_by_time_rule.class%</argument>
+        <service id="mqm_pricing.discount_by_brand_manager" factory-service="mqm_pricing.type_manager_registry" factory-method="getDiscountRuleManager" class="%mqm_pricing.discount_rule_manager.class%" public="false">
+            <argument>%mqm_pricing.model.discount_by_brand_rule.class%</argument>
         </service>
         
         <service id="mqm_pricing.discount_by_user_manager" factory-service="mqm_pricing.type_manager_registry" factory-method="getDiscountRuleManager" class="%mqm_pricing.discount_rule_manager.class%" public="false">
