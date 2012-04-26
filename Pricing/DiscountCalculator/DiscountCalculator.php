@@ -23,6 +23,8 @@ abstract class DiscountCalculator implements DiscountCalculatorInterface
             $discountAbsoluteValue = (float) $price->getValue() * ($discountPercentageValue / 100.0) ;
             $discount = $this->getPricingFactory()->createDiscount();
             $discount->setValue($discountAbsoluteValue);
+            $discount->add('startDate', $this->getDiscountRule()->getStartDate());
+            $discount->add('deadline', $this->getDiscountRule()->getDeadline());
             $price->addDiscount($discount);
         }
     }

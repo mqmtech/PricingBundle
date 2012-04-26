@@ -26,12 +26,13 @@ class DiscountByPortalCalculator implements DiscountCalculatorInterface
         $discountAbsoluteValue = (float) $price->getValue() * ($discountPercentageValue / 100.0) ;
         $discount = $this->priceFactory->createDiscount();
         $discount->setValue($discountAbsoluteValue);
+        $discount->add('deadline', new \DateTime('today + 4 year'));
         
         $price->addDiscount($discount);
     }
     
     private function getDiscountValueFromFileProperties()
     {
-        return 0;
+        return 50;
     }
 }

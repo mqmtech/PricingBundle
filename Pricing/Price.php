@@ -30,6 +30,8 @@ class Price implements PriceInterface
     public function setDiscounts($discounts)
     {
         $this->discounts = $discounts;
+        
+        return $this;
     }
     
     /**
@@ -57,6 +59,8 @@ class Price implements PriceInterface
     public function setValue($value)
     {
         $this->value = $value;
+        
+        return $this;
     }
     
     /**
