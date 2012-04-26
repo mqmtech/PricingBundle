@@ -1,6 +1,6 @@
 name: discount.portal
 description: discount.portal.description
-discount: 50.0
+discount: '20'
 startDate: 26-04-2012
 deadline: 26-04-2016
 createdAt: 26-04-2012
