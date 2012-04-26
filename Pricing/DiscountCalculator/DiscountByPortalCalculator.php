@@ -7,13 +7,17 @@ use MQM\PricingBundle\Pricing\PricingFactoryInterface;
 use MQM\PricingBundle\Pricing\PriceInterface;
 use MQM\PricingBundle\Model\DiscountRule\DiscountRuleManagerInterface;
 use MQM\ProductBundle\Model\ProductInterface;
+use MQM\ToolsBundle\IO\PropertiesInterface;
 
-class DiscountByPortalCalculator implements DiscountCalculatorInterface
-{   
+class DiscountByPortalCalculator extends DiscountCalculator
+{
+    private $discountManager;
     private $priceFactory;
+    private $discountRule;
     
-    public function __construct(PricingFactoryInterface $priceFactory)
+    public function __construct(DiscountRuleManagerInterface $discountManager, $priceFactory)
     {
+        $this->discountManager = $discountManager;
         $this->priceFactory = $priceFactory;
     }
     
@@ -22,17 +26,25 @@ class DiscountByPortalCalculator implements DiscountCalculatorInterface
      */
     public function addDiscountToPrice(ProductInterface $product, PriceInterface $price)
     {
-        $discountPercentageValue = $this->getDiscountValueFromFileProperties();
-        $discountAbsoluteValue = (float) $price->getValue() * ($discountPercentageValue / 100.0) ;
-        $discount = $this->priceFactory->createDiscount();
-        $discount->setValue($discountAbsoluteValue);
-        $discount->add('deadline', new \DateTime('today + 4 year'));
-        
-        $price->addDiscount($discount);
+        $this->discountRule = $this->discountManager->findDiscountRuleBy(array());
+        if ($this->discountRule != null) {
+            return $this->addDiscountToPriceUsingDiscountRule($price);
+        }
     }
-    
-    private function getDiscountValueFromFileProperties()
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function getDiscountRule()
     {
-        return 50;
+        return $this->discountRule;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function getPricingFactory()
+    {
+        return $this->priceFactory;
     }
 }

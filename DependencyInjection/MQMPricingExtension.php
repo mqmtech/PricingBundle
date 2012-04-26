@@ -29,6 +29,7 @@ class MQMPricingExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('orm.xml');
         $loader->load('services.xml');
+        $loader->load('filesystem.xml');
         $this->loadConfig();
     }
     

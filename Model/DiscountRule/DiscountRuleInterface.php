@@ -35,22 +35,22 @@ interface DiscountRuleInterface
     public function getDeadline();    
     
     /**
-     * @param datetime $createdAt
+     * @param \DateTime
      */
     public function setCreatedAt($createdAt);
 
     /**
-     * @return datetime 
+     * @return \DateTime
      */
     public function getCreatedAt();
 
     /**
-     * @param datetime $modifiedAt
+     * @param \DateTime
      */
     public function setModifiedAt($modifiedAt);
 
     /**
-     * @return datetime 
+     * @return \DateTime
      */
     public function getModifiedAt();
 }

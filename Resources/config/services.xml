@@ -7,7 +7,7 @@
     <parameters>
         <parameter key="mqm_pricing.pricing_manager.class">MQM\PricingBundle\Pricing\PricingManager</parameter>        
         <parameter key="mqm_pricing.pricing_factory.class">MQM\PricingBundle\Pricing\PricingFactory</parameter>       
-        <parameter key="mqm_pricingl.price.class">MQM\PricingBundle\Pricing\Price</parameter>
+        <parameter key="mqm_pricing.price.class">MQM\PricingBundle\Pricing\Price</parameter>
         <parameter key="mqm_pricing.discount.class">MQM\PricingBundle\Pricing\Discount</parameter>         
         
         <parameter key="mqm_pricing.price_default_calculator.class">MQM\PricingBundle\Pricing\PriceCalculator\PriceDefaultCalculator</parameter>
@@ -20,7 +20,7 @@
 
     <services>
         <service id="mqm_pricing.pricing_factory" class="%mqm_pricing.pricing_factory.class%" public="true">
-            <argument>%mqm_pricingl.price.class%</argument>
+            <argument>%mqm_pricing.price.class%</argument>
             <argument>%mqm_pricing.discount.class%</argument>        
         </service>
         
@@ -62,6 +62,7 @@
         
         <service id="mqm_pricing.discount_by_portal_calculator" class="%mqm_pricing.discount_by_portal_calculator.class%" public="true">
             <tag name="mqm_pricing.discount_calculator" />
+            <argument type="service" id="mqm_pricing.discount_by_portal_manager" />
             <argument type="service" id="mqm_pricing.pricing_factory" />
         </service>
     </services>
