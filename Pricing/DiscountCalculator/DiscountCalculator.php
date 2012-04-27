@@ -13,14 +13,14 @@ use Symfony\Component\Locale\Exception\NotImplementedException;
 abstract class DiscountCalculator implements DiscountCalculatorInterface
 {     
     /**
-     *
-     * @param PriceInterface $price 
+     * @param PriceInterface $price
      */
     public function addDiscountToPriceUsingDiscountRule(PriceInterface $price)
     {
         if ($this->isDiscountInValidDateNotNullAndGreaterThanZero()) {
-            $discountPercentageValue = $this->getDiscountRule()->getDiscount(); //We assume that the discount value from the DiscountRule is the percentage value
-            $discountAbsoluteValue = (float) $price->getValue() * ($discountPercentageValue / 100.0) ;
+            $discountValue = $this->getDiscountRule()->getDiscount();
+            $discountNormalized = $this->normalizeDiscount($discountValue);
+            $discountAbsoluteValue = (float) $price->getOriginalValue() * ($discountNormalized) ;
             $discount = $this->getPricingFactory()->createDiscount();
             $discount->setValue($discountAbsoluteValue);
             $discount->add('startDate', $this->getDiscountRule()->getStartDate());
@@ -46,7 +46,20 @@ abstract class DiscountCalculator implements DiscountCalculatorInterface
         }    
         
         return false;
-    } 
+    }
+
+    /**
+     * @param float
+     * @return float
+     */
+    public function normalizeDiscount($discount)
+    {
+        if ($discount > 1.0) {
+            $discount = (float)$discount / 100.0;
+        }
+
+        return $discount;
+    }
     
     /**
      * @return DiscountRuleInterface

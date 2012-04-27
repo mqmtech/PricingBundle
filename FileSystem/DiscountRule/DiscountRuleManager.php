@@ -74,7 +74,7 @@ class DiscountRuleManager implements DiscountRuleManagerInterface
     private function saveDiscountRuleToFile(DiscountRuleInterface $discountRule)
     {
         $dateFormat = 'd-m-Y';
-        $this->discountProperties->setProperty('discount', $discountRule->getDiscount());
+        $this->discountProperties->setProperty('discount', (float) $discountRule->getDiscount());
         $this->discountProperties->setProperty('startDate', $discountRule->getStartDate()->format($dateFormat));
         $this->discountProperties->setProperty('deadline', $discountRule->getDeadline()->format($dateFormat));
         $this->discountProperties->setProperty('createdAt', $discountRule->getCreatedAt()->format($dateFormat));
@@ -88,7 +88,7 @@ class DiscountRuleManager implements DiscountRuleManagerInterface
          */
         $rule = new $this->discountRuleClass();
 
-        $discount = $this->discountProperties->getProperty('discount');
+        $discount = (float) $this->discountProperties->getProperty('discount');
         $startDateString = $this->discountProperties->getProperty('startDate');
         $deadlineString = $this->discountProperties->getProperty('deadline');
         $createdAtString = $this->discountProperties->getProperty('createdAt');
