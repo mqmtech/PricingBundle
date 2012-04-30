@@ -2,74 +2,57 @@
 
 namespace MQM\PricingBundle\Entity\DiscountRule;
 
-use MQM\PricingBundle\Entity\DiscountRule\DiscountRule;
+use MQM\PricingBundle\Model\DiscountRule\DiscountRuleInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- *
- * @ORM\Table(name="mqm_pricing_discount_by_user_rule")
- * @ORM\Entity
+ * @ORM\MappedSuperClass
  */
-class DiscountByUserRule extends DiscountRule
+abstract class DiscountRule implements DiscountRuleInterface
 {
     /**
-     * @var integer $id
+     * @var \DateTime $createdAt
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="createdAt", type="datetime", nullable=true)
      */
-    protected $id;
-    
-    /**
-     * @var string $email
-     *
-     * @ORM\Column(name="email", type="string", nullable=true)
-     */
-    protected $email;
+    protected $createdAt;
 
-    public function __construct()
+    /**
+     * @var \DateTime $modifiedAt
+     *
+     * @ORM\Column(name="modifiedAt", type="datetime", nullable=true)
+     */
+    protected $modifiedAt;
+
+    /**
+     * @var float $discount
+     *
+     * @ORM\Column(name="discount", type="float", nullable=true)
+     */
+    protected $discount;
+
+    /**
+     * @var \DateTime $startDate
+     *
+     * @ORM\Column(name="startDate", type="datetime", nullable=true)
+     */
+    protected $startDate;
+
+    /**
+     * @var \DateTime $deadline
+     *
+     * @ORM\Column(name="deadline", type="datetime", nullable=true)
+     */
+    protected $deadline;
+
+    public function __construct(ProductInterface $product = null)
     {        
         $this->createdAt = new \DateTime();
         $this->startDate = new \DateTime('today');
         $this->deadline = new \DateTime('today + 4 year');
     }
     
-    /**
-     * {@inheritDoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-    
-    /**
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     *
-     * @param string $email 
-     */
-    public function setEmail($email)
-    {
-        $this->username = $email;
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -117,11 +100,11 @@ class DiscountByUserRule extends DiscountRule
     {
         $this->discount = $discount;
     }
-
+    
     /**
      * {@inheritDoc}
      */
-    public function getStartDate()
+    public function getstartDate()
     {
         return $this->startDate;
     }

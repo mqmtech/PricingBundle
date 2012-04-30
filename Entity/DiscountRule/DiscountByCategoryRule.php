@@ -2,7 +2,7 @@
 
 namespace MQM\PricingBundle\Entity\DiscountRule;
 
-use MQM\PricingBundle\Model\DiscountRule\DiscountRuleInterface;
+use MQM\PricingBundle\Entity\DiscountRule\DiscountRule;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -10,9 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="mqm_pricing_discount_by_category_rule")
  * @ORM\Entity
- * @ORM\HasLifecycleCallbacks
  */
-class DiscountByCategoryRule implements DiscountRuleInterface
+class DiscountByCategoryRule extends DiscountRule
 {
     /**
      * @var integer $id
@@ -21,50 +20,15 @@ class DiscountByCategoryRule implements DiscountRuleInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
     
     /**
      * @var string $categoryId
      *
      * @ORM\Column(name="categoryId", type="string", nullable=true)
      */
-    private $categoryId;
-    
-    /**
-     * @var \DateTime $createdAt
-     *
-     * @ORM\Column(name="createdAt", type="datetime", nullable=true)
-     */
-    private $createdAt;
+    protected $categoryId;
 
-    /**
-     * @var \DateTime $modifiedAt
-     *
-     * @ORM\Column(name="modifiedAt", type="datetime", nullable=true)
-     */
-    private $modifiedAt;
-    
-    /**
-     * @var float $discount
-     *
-     * @ORM\Column(name="discount", type="float", nullable=true)
-     */
-    private $discount;
-    
-    /**
-     * @var \DateTime $startDate
-     *
-     * @ORM\Column(name="startDate", type="datetime", nullable=true)
-     */
-    private $startDate;
-
-    /**
-     * @var \DateTime $deadline
-     *
-     * @ORM\Column(name="deadline", type="datetime", nullable=true)
-     */
-    private $deadline;
-    
     public function __construct()
     {        
         $this->createdAt = new \DateTime();

@@ -8,7 +8,7 @@ interface DiscountRuleInterface
      * @param float $discount
      */
     public function setDiscount($discount);
-    
+
     /**
      * @return float
      */

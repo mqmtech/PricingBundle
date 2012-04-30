@@ -98,8 +98,12 @@ class Price implements PriceInterface
     /**
      * {@inheritDoc}
      */
-    public function getTotalDiscountsPercetageValue()
+    public function getTotalDiscountsPercentageValue()
     {
+        if ($this->getOriginalValue() < 0.0000001) {
+            //throw new \Exception('original value is zero');
+            return 0;
+        }
         $totalDiscountsValue = (float) $this->getTotalDiscountsValue();
         
         return ((float) $totalDiscountsValue / (float) $this->getOriginalValue()) * (float) 100.0;

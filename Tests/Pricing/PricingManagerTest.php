@@ -126,7 +126,7 @@ class PriceRuleManagerTest extends \Symfony\Bundle\FrameworkBundle\Test\WebTestC
         $this->assertEquals(1.5, $discount2->getValue());
         $this->assertEquals(96.5, $price->getValue());
         $this->assertEquals(3.5, $price->getTotalDiscountsValue());
-        $this->assertLessThan(0.00001, 3.5 - $price->getTotalDiscountsPercetageValue());
+        $this->assertLessThan(0.00001, 3.5 - $price->getTotalDiscountsPercentageValue());
     }
     
     private function createTestProducts()

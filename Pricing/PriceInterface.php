@@ -34,7 +34,7 @@ interface PriceInterface
     /**
      * @return float 
      */
-    public function getTotalDiscountsPercetageValue();
+    public function getTotalDiscountsPercentageValue();
     
     /**
      * @param array
