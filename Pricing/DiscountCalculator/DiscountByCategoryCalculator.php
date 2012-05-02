@@ -27,18 +27,18 @@ class DiscountByCategoryCalculator extends DiscountCalculator
      */
     public function addDiscountToPrice(ProductInterface $product, PriceInterface $price)
     {
-        $category = $product->getcategory();
+        $category = $product->getCategory();
         if ($category == null)
             return;
         
         $categoryId = $category->getId();        
         if ($categoryId == null)
-           return; 
-        
+           return;
+
         $this->discountRule = $this->discountRuleManager->findDiscountRuleBy(array('categoryId' => $categoryId));
         if ($this->discountRule != null) {
             return $this->addDiscountToPriceUsingDiscountRule($price);
-        }        
+        }
     }
 
     /**
