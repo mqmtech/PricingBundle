@@ -62,6 +62,9 @@ class PricingManager implements PricingManagerInterface
             $event->setPrice($price);
             $this->eventDispatcher->dispatch(PricingEvents::onDiscountCalculation, $event);        
         }
+        else {
+            $price = $this->pricingFactory->createPrice(); //Special Case Pattern
+        }
 
         return $price;
     }

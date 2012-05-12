@@ -51,11 +51,11 @@ interface PricingManagerInterface
      * @param string 
      * @return PriceRuleManagerInterface
      */
-    public function getPriceRuleManager($priceRuleClass);
+    public function getPriceRuleManager($priceRuleClass = null);
     
     /**
      * @param string 
      * @return DiscountRuleManagerInterface
      */
-    public function getDiscountRuleManager($discountRuleClass);
+    public function getDiscountRuleManager($discountRuleClass = null);
 }

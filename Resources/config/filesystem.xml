@@ -5,10 +5,10 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="mqm_pricing.discount_by_portal_manager.class">MQM\PricingBundle\Filesystem\DiscountRule\DiscountRuleManager</parameter>
-        <parameter key="mqm_pricing.model.discount_by_portal_rule.class">MQM\PricingBundle\Filesystem\DiscountRule\DiscountByPortalRule</parameter>
+        <parameter key="mqm_pricing.discount_by_portal_manager.class">MQM\PricingBundle\FileSystem\DiscountRule\DiscountRuleManager</parameter>
+        <parameter key="mqm_pricing.model.discount_by_portal_rule.class">MQM\PricingBundle\FileSystem\DiscountRule\DiscountByPortalRule</parameter>
         <parameter key="mqm_pricing.portal_discount_config.class">MQM\ToolsBundle\IO\PropertiesInterface</parameter>
-        <parameter key="mqm_pricing.file_config_factory.class">MQM\PricingBundle\Filesystem\DiscountFilePropertiesFactory</parameter>
+        <parameter key="mqm_pricing.file_config_factory.class">MQM\PricingBundle\FileSystem\DiscountFilePropertiesFactory</parameter>
         <parameter key="mqm_pricing.file_portal_discount_config_path">/Resources/config/portal_discount_rule.yml</parameter>
     </parameters>
     
