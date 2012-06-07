@@ -15,7 +15,7 @@ abstract class DiscountCalculator implements DiscountCalculatorInterface
     /**
      * @param PriceInterface $price
      */
-    public function addDiscountToPriceUsingDiscountRule(PriceInterface $price)
+    public function addDiscountToPriceUsingDiscountRule(PriceInterface $price, $priority = null)
     {
         if ($this->isDiscountInValidDateNotNullAndGreaterThanZero()) {
             $discountValue = $this->getDiscountRule()->getDiscount();
@@ -25,7 +25,7 @@ abstract class DiscountCalculator implements DiscountCalculatorInterface
             $discount->setValue($discountAbsoluteValue);
             $discount->add('startDate', $this->getDiscountRule()->getStartDate());
             $discount->add('deadline', $this->getDiscountRule()->getDeadline());
-            $price->addDiscount($discount);
+            $price->addDiscount($discount, $priority);
         }
     }
     

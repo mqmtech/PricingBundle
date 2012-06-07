@@ -29,31 +29,29 @@ class DiscountByUserRule extends DiscountRule
      */
     protected $email;
 
+    /**
+     * @var float $extraDiscount
+     *
+     * @ORM\Column(name="extraDiscount", type="float", nullable=true)
+     */
+    protected $extraDiscount;
+
     public function __construct()
-    {        
+    {
         $this->createdAt = new \DateTime();
         $this->startDate = new \DateTime('today');
         $this->deadline = new \DateTime('today + 4 year');
     }
-    
+
     /**
-     * {@inheritDoc}
+     * @param string $email
      */
-    public function getId()
+    public function setEmail($email)
     {
-        return $this->id;
+        $this->email = $email;
     }
 
     /**
-     * {@inheritDoc}
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-    
-    /**
-     *
      * @return string
      */
     public function getEmail()
@@ -62,91 +60,34 @@ class DiscountByUserRule extends DiscountRule
     }
 
     /**
-     *
-     * @param string $email 
+     * @param float $extraDiscount
      */
-    public function setEmail($email)
+    public function setExtraDiscount($extraDiscount)
     {
-        $this->username = $email;
+        $this->extraDiscount = $extraDiscount;
     }
 
     /**
-     * {@inheritDoc}
+     * @return float
      */
-    public function getCreatedAt()
+    public function getExtraDiscount()
     {
-        return $this->createdAt;
+        return $this->extraDiscount;
     }
 
     /**
-     * {@inheritDoc}
+     * @param int $id
      */
-    public function setCreatedAt($createdAt)
+    public function setId($id)
     {
-        $this->createdAt = $createdAt;
+        $this->id = $id;
     }
 
     /**
-     * {@inheritDoc}
+     * @return int
      */
-    public function getModifiedAt()
+    public function getId()
     {
-        return $this->modifiedAt;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setModifiedAt($modifiedAt)
-    {
-        $this->modifiedAt = $modifiedAt;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getDiscount()
-    {
-        return $this->discount;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setDiscount($discount)
-    {
-        $this->discount = $discount;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getStartDate()
-    {
-        return $this->startDate;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setStartDate($startDate)
-    {
-        $this->startDate = $startDate;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getDeadline()
-    {
-        return $this->deadline;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setDeadline($deadline)
-    {
-        $this->deadline = $deadline;
+        return $this->id;
     }
 }

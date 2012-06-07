@@ -28,7 +28,7 @@ class DiscountByPortalCalculator extends DiscountCalculator
     {
         $this->discountRule = $this->discountManager->findDiscountRuleBy(array());
         if ($this->discountRule != null) {
-            return $this->addDiscountToPriceUsingDiscountRule($price);
+            return $this->addDiscountToPriceUsingDiscountRule($price, 9);
         }
     }
 

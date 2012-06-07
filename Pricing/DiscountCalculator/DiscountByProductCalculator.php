@@ -27,7 +27,7 @@ class DiscountByProductCalculator extends DiscountCalculator
     {
         $this->discountRule = $this->discountRuleManager->findDiscountRuleBy(array('product' => $product->getId()));
         if ($this->discountRule != null) {
-            return $this->addDiscountToPriceUsingDiscountRule($price);
+            return $this->addDiscountToPriceUsingDiscountRule($price, 6);
         }
     }
 

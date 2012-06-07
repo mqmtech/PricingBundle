@@ -5,10 +5,12 @@ namespace MQM\PricingBundle\Pricing;
 use MQM\PricingBundle\Pricing\PriceInterface;
 use MQM\PricingBundle\Pricing\DiscountInterface;
 use Symfony\Component\Form\Exception\NotValidException;
+use MQM\ToolsBundle\Utils;
 
 class Price implements PriceInterface
-{   
-    private $discounts;
+{
+    private $maxPriority = -1;
+    private $discounts = array();
     private $value;
     
     public function __construct()
@@ -33,16 +35,34 @@ class Price implements PriceInterface
         
         return $this;
     }
-    
+
     /**
      * {@inheritDoc}
      */
-    public function addDiscount(DiscountInterface $discount)
+    public function addDiscount(DiscountInterface $discount, $priority = -1)
     {
-        if ($this->discounts == null) {
-            $this->discounts = array();
+        if ($this->maxPriority > 0) {
+            $this->setDiscountWithPriority($discount, $priority);
         }
-        $this->discounts[] = $discount;
+        else {
+            $this->discounts[] = $discount;
+            $this->maxPriority = $priority;
+        }
+
+        return $this;
+    }
+
+    private function setDiscountWithPriority(DiscountInterface $discount, $priority = -1)
+    {
+        if ($this->maxPriority < $priority ) {
+            $this->maxPriority = $priority;
+            unset($this->discounts);
+            $this->discounts = array();
+            $this->discounts[] = $discount;
+        }
+        elseif ($this->maxPriority == $priority) {
+            $this->discounts[] = $discount;
+        }
     }
     
     /**
@@ -105,8 +125,10 @@ class Price implements PriceInterface
             return 0;
         }
         $totalDiscountsValue = (float) $this->getTotalDiscountsValue();
-        
-        return ((float) $totalDiscountsValue / (float) $this->getOriginalValue()) * (float) 100.0;
+        $percentage = ((float) $totalDiscountsValue / (float) $this->getOriginalValue()) * (float) 100.0;
+
+        return $percentage;
+
     }
 
     /**

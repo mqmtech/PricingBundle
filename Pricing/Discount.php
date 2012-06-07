@@ -5,7 +5,7 @@ namespace MQM\PricingBundle\Pricing;
 use MQM\PricingBundle\Pricing\DiscountInterface;
 
 class Discount implements DiscountInterface
-{   
+{
     private $value;
     private $name;
     private $description;

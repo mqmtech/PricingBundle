@@ -36,7 +36,7 @@ class DiscountByBrandCalculator extends DiscountCalculator
         
         $this->discountRule = $this->discountRuleManager->findDiscountRuleBy(array('brandId' => $brandId));
         if ($this->discountRule != null) {
-            return $this->addDiscountToPriceUsingDiscountRule($price);
+            return $this->addDiscountToPriceUsingDiscountRule($price, 7);
         }        
     }    
 
