@@ -33,7 +33,7 @@ class DiscountByUserCalculator extends DiscountCalculator
     public function addDiscountToPrice(ProductInterface $product, PriceInterface $price)
     {
         $user = $this->userManager->getCurrentUser();
-        if (!$this->userManager->isDBUser($user)) {
+        if (!$this->userManager->isLoggedIn($user)) {
             return;
         }
         else {
