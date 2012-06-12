@@ -53,6 +53,15 @@ abstract class DiscountRule implements DiscountRuleInterface
         $this->deadline = new \DateTime('today + 4 year');
     }
     
+    public function __toString()
+    {
+        if ($this->discount == 0) {
+            return '0';
+        }
+        
+        return '' . ($this->discount * 100);
+    }
+    
     /**
      * {@inheritDoc}
      */

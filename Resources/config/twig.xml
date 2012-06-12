@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="mqm_pricing.templating.helper.class">MQM\PricingBundle\Templating\Helper\PricingHelper</parameter>
+        <parameter key="mqm_pricing.twig_extension.class">MQM\PricingBundle\Twig\Extension\PricingExtension</parameter>
+    </parameters>
+    
+    <services>
+        <service id="mqm_pricing.templating.helper" class="%mqm_pricing.templating.helper.class%" public="true">
+            <tag name="templating.helper" alias="mqm_pricing" />
+            <argument type="service" id="templating" />            
+        </service>
+
+        <service id="mqm_pricing.twig_extension" class="%mqm_pricing.twig_extension.class%" public="true">            
+            <tag name="twig.extension" />
+            <argument type="service" id="service_container" />
+        </service>
+    </services>
+    
+</container>

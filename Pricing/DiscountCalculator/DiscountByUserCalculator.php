@@ -7,7 +7,7 @@ use MQM\PricingBundle\Pricing\PricingFactoryInterface;
 use MQM\PricingBundle\Pricing\PriceInterface;
 use MQM\PricingBundle\Model\DiscountRule\DiscountRuleManagerInterface;
 use MQM\ProductBundle\Model\ProductInterface;
-use MQM\UserBundle\Model\UserManagerInterface;
+use MQM\UserBundle\Helper\UserAuthenticatedResolverInterface;
 use MQM\PricingBundle\Entity\DiscountRule\DiscountByUserRule;
 
 class DiscountByUserCalculator extends DiscountCalculator
@@ -18,13 +18,13 @@ class DiscountByUserCalculator extends DiscountCalculator
      * @var DiscountByUserRule
      */
     private $discountRule;
-    private $userManager;
+    private $userResolver;
     
-    public function __construct(DiscountRuleManagerInterface $discountRuleManager, UserManagerInterface $userManager, PricingFactoryInterface $priceFactory)
+    public function __construct(DiscountRuleManagerInterface $discountRuleManager, UserAuthenticatedResolverInterface $userResolver, PricingFactoryInterface $priceFactory)
     {
         $this->discountRuleManager = $discountRuleManager;
         $this->priceFactory = $priceFactory;
-        $this->userManager = $userManager;
+        $this->userResolver = $userResolver;
     }
     
     /**
@@ -32,12 +32,9 @@ class DiscountByUserCalculator extends DiscountCalculator
      */
     public function addDiscountToPrice(ProductInterface $product, PriceInterface $price)
     {
-        $user = $this->userManager->getCurrentUser();
-        if (!$this->userManager->isLoggedIn($user)) {
+        $user = $this->userResolver->getCurrentUser();
+        if (!$this->userResolver->isLoggedIn($user)) {
             return;
-        }
-        else {
-            $user = $this->userManager->refreshUser($user);
         }
         $email = $user->getEmail();
 
@@ -59,8 +56,8 @@ class DiscountByUserCalculator extends DiscountCalculator
             $discountValue = $this->getDiscountRule()->getDiscount();
             $discountNormalized = $this->normalizeDiscount($discountValue);
 
-            $extraDiscountRule = $this->getDiscountRule()->getExtraDiscount();
-            $extraDiscountNormalized = $this->normalizeDiscount($extraDiscountRule);
+            $extraDiscountValue = $this->getDiscountRule()->getExtraDiscount();
+            $extraDiscountNormalized = $this->normalizeDiscount($extraDiscountValue);
 
             $totalDiscountNormalized = ($discountNormalized + ($extraDiscountNormalized * $discountNormalized));
             $totalDiscountAbsoluteValue = (float) $price->getOriginalValue() * ($totalDiscountNormalized);
@@ -69,7 +66,7 @@ class DiscountByUserCalculator extends DiscountCalculator
             $discount->setValue($totalDiscountAbsoluteValue);
             $discount->add('startDate', $this->getDiscountRule()->getStartDate());
             $discount->add('deadline', $this->getDiscountRule()->getDeadline());
-            $discount->add('shortDescription', $discountNormalized . ' + ' . $extraDiscountNormalized);
+            $discount->setName($this->getDiscountRule());
             $price->addDiscount($discount, $priority);
         }
     }

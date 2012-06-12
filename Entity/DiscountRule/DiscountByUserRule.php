@@ -42,6 +42,19 @@ class DiscountByUserRule extends DiscountRule
         $this->startDate = new \DateTime('today');
         $this->deadline = new \DateTime('today + 4 year');
     }
+    
+    public function __toString()
+    {
+        if ($this->discount == 0) {
+            return '0';
+        }
+        $name = '' . ($this->discount * 100);
+        if ($this->extraDiscount > 0) {
+            $name .= '+' . ($this->extraDiscount * 100);
+        }
+        
+        return $name;
+    }
 
     /**
      * @param string $email

@@ -7,7 +7,7 @@ use MQM\PricingBundle\Pricing\DiscountInterface;
 class Discount implements DiscountInterface
 {
     private $value;
-    private $name;
+    private $name;    
     private $description;
     private $vars = array();
     

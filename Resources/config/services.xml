@@ -57,7 +57,7 @@
         <service id="mqm_pricing.discount_by_user_rule_calculator" class="%mqm_pricing.discount_by_user_calculator.class%" public="true">
             <tag name="mqm_pricing.discount_calculator" />
             <argument type="service" id="mqm_pricing.discount_by_user_manager" />
-            <argument type="service" id="mqm_user.user_manager" />
+            <argument type="service" id="mqm_user.user_resolver" />
             <argument type="service" id="mqm_pricing.pricing_factory" />
         </service>
         

@@ -30,6 +30,7 @@ class MQMPricingExtension extends Extension
         $loader->load('orm.xml');
         $loader->load('services.xml');
         $loader->load('filesystem.xml');
+        $loader->load('twig.xml');
         $this->loadConfig();
     }
     
