@@ -1,2 +1,2 @@
 #Portal discount rule
-Resources/portal_discount_rule.*
+Resources/config/portal_discount_rule.yml
