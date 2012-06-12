@@ -10,6 +10,7 @@
         <parameter key="mqm_pricing.portal_discount_config.class">MQM\ToolsBundle\IO\PropertiesInterface</parameter>
         <parameter key="mqm_pricing.file_config_factory.class">MQM\PricingBundle\FileSystem\DiscountFilePropertiesFactory</parameter>
         <parameter key="mqm_pricing.file_portal_discount_config_path">/Resources/config/portal_discount_rule.yml</parameter>
+        <parameter key="mqm_pricing.file_portal_discount_config_fallback_path">/Resources/config/portal_discount_rule_default.yml</parameter>
     </parameters>
     
     <services>
@@ -26,6 +27,7 @@
         <service id="mqm_pricing.file_config_factory" class="%mqm_pricing.file_config_factory.class%" public="true">
             <argument type="service" id="mqm_tools.yaml_reader" />
             <argument>%mqm_pricing.file_portal_discount_config_path%</argument>
+            <argument>%mqm_pricing.file_portal_discount_config_fallback_path%</argument>
         </service>
     </services>
     
