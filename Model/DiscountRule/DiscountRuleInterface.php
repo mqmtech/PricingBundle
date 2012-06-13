@@ -4,6 +4,7 @@ namespace MQM\PricingBundle\Model\DiscountRule;
 
 interface DiscountRuleInterface
 {
+    public function __toString();
     /**
      * @param float $discount
      */
