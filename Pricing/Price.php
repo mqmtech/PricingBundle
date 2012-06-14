@@ -41,13 +41,14 @@ class Price implements PriceInterface
      */
     public function addDiscount(DiscountInterface $discount, $priority = -1)
     {
-        if ($this->maxPriority > 0) {
+        /*if ($this->maxPriority > 0) {
             $this->setDiscountWithPriority($discount, $priority);
         }
         else {
             $this->discounts[] = $discount;
             $this->maxPriority = $priority;
-        }
+        }*/
+        $this->discounts[] = $discount;
 
         return $this;
     }
